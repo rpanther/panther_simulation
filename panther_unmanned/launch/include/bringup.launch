@@ -29,8 +29,8 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <launch>
 
-  <arg name="zed_stereo_enabled" default="true"/>
-  <arg name="joystick_enabled" default="false"/>
+  <arg name="zed" default="true"/>
+  <arg name="joystick" default="false"/>
 
   <!-- Load unav hardware interface -->
   <include file="$(find panther_control)/launch/include/driver.launch" />
@@ -39,18 +39,19 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <include file="$(find panther_control)/launch/control.launch" />
 
   <!-- Launch IMU sensor -->
-  <!--<include file="$(find panther_control)/launch/include/imu.launch" />-->
+  <include file="$(find panther_control)/launch/include/imu.launch" />
 
   <!-- Start ZED camera and laser scan -->
-  <group if="$(arg zed_stereo_enabled)">
+  <group if="$(arg zed)">
     <include file="$(find panther_control)/launch/include/zed_stereo.launch" />
   </group>
 
+  <!-- Launch diagnostic aggregator -->
+  <include file="$(find panther_control)/launch/diagnostic.launch" />
+
   <!-- Load teleoperation telecontrol -->
-  <group if="$(arg joystick_enabled)">
-  <include file="$(find panther_control)/launch/teleop.launch" />
+  <group if="$(arg joystick)">
+    <include file="$(find panther_control)/launch/teleop.launch" />
   </group>
-
-
  
 </launch>
