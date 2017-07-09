@@ -38,6 +38,9 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Load controller and EKF -->
   <include file="$(find panther_control)/launch/control.launch" />
 
+  <!-- Launch LIDAR sensor -->
+  <include file="$(find panther_control)/launch/include/lidar.launch" />
+
   <!-- Launch IMU sensor -->
   <include file="$(find panther_control)/launch/include/imu.launch" />
 
