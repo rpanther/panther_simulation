@@ -1,3 +1,5 @@
+<?xml version="1.0"?>
+<!--
 The MIT License (MIT)
 
 Copyright (c) 2020 Raffaello Bonghi
@@ -19,4 +21,40 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+-->
+<robot name="pantker_color_gazebo" xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <!--<xacro:include filename="$(find panther_gazebo)/urdf/accessories/imu.gazebo.xacro"/>-->
+
+  <xacro:macro name="materials_gazebo">
+
+  <!-- COLOR REFERENCE:
+   https://bitbucket.org/osrf/gazebo/src/default/media/materials/scripts/gazebo.material?fileviewer=file-view-default
+  -->
+
+  <!-- chassis -->
+  <gazebo reference="cover_link">
+    <material>Gazebo/WhiteGlow</material>
+  </gazebo>
+  <gazebo reference="iron_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="frame_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="antenna_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="speaker_link">
+    <material>Gazebo/Gold</material>
+  </gazebo>
+
+  <gazebo reference="stand_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="laser_link">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  </xacro:macro>
+
+</robot>
