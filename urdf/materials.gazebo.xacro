@@ -24,37 +24,34 @@ SOFTWARE.
 -->
 <robot name="pantker_color_gazebo" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <!--<xacro:include filename="$(find panther_gazebo)/urdf/accessories/imu.gazebo.xacro"/>-->
-
   <xacro:macro name="materials_gazebo">
+    <!-- COLOR REFERENCE:
+    https://bitbucket.org/osrf/gazebo/src/default/media/materials/scripts/gazebo.material?fileviewer=file-view-default
+    -->
+    
+    <!-- chassis -->
+    <gazebo reference="cover_link">
+      <material>Gazebo/WhiteGlow</material>
+    </gazebo>
+    <gazebo reference="iron_link">
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="frame_link">
+      <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="antenna_link">
+      <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="speaker_link">
+      <material>Gazebo/Gold</material>
+    </gazebo>
 
-  <!-- COLOR REFERENCE:
-   https://bitbucket.org/osrf/gazebo/src/default/media/materials/scripts/gazebo.material?fileviewer=file-view-default
-  -->
-
-  <!-- chassis -->
-  <gazebo reference="cover_link">
-    <material>Gazebo/WhiteGlow</material>
-  </gazebo>
-  <gazebo reference="iron_link">
-    <material>Gazebo/Grey</material>
-  </gazebo>
-  <gazebo reference="frame_link">
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="antenna_link">
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="speaker_link">
-    <material>Gazebo/Gold</material>
-  </gazebo>
-
-  <gazebo reference="stand_link">
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="laser_link">
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
+    <gazebo reference="stand_link">
+      <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="laser_link">
+      <material>Gazebo/DarkGrey</material>
+    </gazebo>
   </xacro:macro>
 
 </robot>

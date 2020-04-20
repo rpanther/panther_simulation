@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
 <package>
-  <name>panther_gazebo</name>
+  <name>panther_simulation</name>
   <version>1.0.0</version>
-  <description>Panther Gazebo simulator.</description>
+  <description>Panther Gazebo simulator</description>
   
-  <license>MIT</license>
   <maintainer email="raffaello@rnext.it">Raffaello Bonghi</maintainer>
+  <license>MIT</license>
+  
+  <url type="website">https://rnext.it/panther</url>
   <url type="repository">https://github.com/rpanther/panther_simulation</url>
   <author email="raffaello@rnext.it">Raffaello Bonghi</author>
 
@@ -14,5 +16,7 @@
 
   <run_depend>panther_description</run_depend>
   <run_depend>gazebo_ros</run_depend>
+  <run_depend>gazebo_plugins</run_depend>
+  <run_depend>gazebo_ros_control</run_depend>
 
 </package>

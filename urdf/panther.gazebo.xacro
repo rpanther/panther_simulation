@@ -22,29 +22,40 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-<robot name="panther_robot_gazebo" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="sim_panther" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <!--<xacro:arg name="imu_enabled" default="false" />-->
-  <xacro:arg name="name_space" default="/" />
+  <xacro:arg name="name_space" default="/panther" /> 
+  <!-- Arguments -->
+  <xacro:arg name="zed_model"   default="zed2"/> <!-- Follow zed_repository -->
+  <xacro:arg name="jetson"      default="xavier"/> <!-- options: tx, xavier -->
+  <xacro:arg name="motor_board" default="roboteq"/> <!-- options: unav, roboteq -->
+  <xacro:arg name="ssd"         default="false"/>
 
-  <xacro:include filename="$(find panther_description)/urdf/panther.urdf.xacro" />
-  <xacro:include filename="$(find panther_gazebo)/urdf/materials.gazebo.xacro" />
+  <xacro:include filename="$(find panther_description)/urdf/robot.urdf.xacro" />
+  <xacro:include filename="$(find panther_simulation)/urdf/materials.gazebo.xacro" />
   <!-- sensors -->
-  <xacro:include filename="$(find panther_gazebo)/urdf/zed.gazebo.xacro" />
-  <xacro:include filename="$(find panther_gazebo)/urdf/lidar.gazebo.xacro" />
+  <xacro:include filename="$(find panther_simulation)/urdf/zed.gazebo.xacro" />
+  <xacro:include filename="$(find panther_simulation)/urdf/lidar.gazebo.xacro" />
 
   <!-- Gazebo plugin for ROS Control -->
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
+      <robotNamespace>$(arg name_space)</robotNamespace>
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
   </gazebo>
 
-  <xacro:panther_robot />
+  <!-- Color materials for Gazebo -->
   <xacro:materials_gazebo />
-
-  <xacro:lidar_gazebo />
+  <!-- ZED emulation -->
   <xacro:zed_camera_gazebo prefix="zed" />
-
+  <!-- LIDAR emulation -->
+  <xacro:lidar_gazebo />
+  <!-- Panther robot -->
+  <xacro:panther
+              zed_model="$(arg zed_model)"
+              jetson="$(arg jetson)"
+              motor_board="$(arg motor_board)"
+              ssd="$(arg ssd)" />
 </robot>

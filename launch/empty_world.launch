@@ -35,7 +35,7 @@ SOFTWARE.
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find panther_gazebo)/worlds/$(arg world)"/>
+    <arg name="world_name" value="$(find panther_simulation)/worlds/$(arg world)"/>
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>
@@ -43,21 +43,27 @@ SOFTWARE.
     <arg name="headless" value="$(arg headless)"/>
   </include>
 
-  <!-- Send the Panther Robot URDF/XACRO to param server -->
-  <param name="robot_description" 
-	command="$(find xacro)/xacro.py --inorder '$(find panther_gazebo)/urdf/description.gazebo.xacro'" />
-
-  <!-- Activate node to propagate the joint state -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-
   <!-- Load dude control information -->
-  <include file="$(find panther_control)/launch/control.launch"/>
+  <include file="$(find panther_bringup)/launch/bringup.launch">
+    <arg name="drivers" value="false"/>
+    <arg name="web" value="false"/>
+  </include>
 
-  <!-- Run fake laser scan -->
-  <!--<include file="$(find ros_dude_gazebo)/launch/accessories/laser_scan.launch"/>-->
+  <group ns="panther">
+    <!-- Send the Panther Robot URDF/XACRO to param server -->
+    <param name="robot_description"
+          command="$(find xacro)/xacro '$(find panther_simulation)/urdf/panther.gazebo.xacro'
+              name_space:=/panther" />
 
-  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-	args="-unpause -urdf -param robot_description -model mobile_base"/>
+    <!-- Activate node to propagate the joint state -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <!-- Run fake laser scan -->
+    <!--<include file="$(find ros_dude_gazebo)/launch/accessories/laser_scan.launch"/>-->
+
+    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-unpause -urdf -param robot_description -model mobile_base"/>
+  
+  </group>
 
 </launch>
