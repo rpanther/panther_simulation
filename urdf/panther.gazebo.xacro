@@ -31,6 +31,7 @@ SOFTWARE.
   <xacro:arg name="jetson"      default="xavier"/> <!-- options: tx, xavier -->
   <xacro:arg name="motor_board" default="roboteq"/> <!-- options: unav, roboteq -->
   <xacro:arg name="ssd"         default="false"/>
+  <xacro:arg name="ultrasounds"  default="false"/>
 
   <xacro:include filename="$(find panther_description)/urdf/robot.urdf.xacro" />
   <xacro:include filename="$(find panther_simulation)/urdf/materials.gazebo.xacro" />
@@ -57,5 +58,6 @@ SOFTWARE.
               zed_model="$(arg zed_model)"
               jetson="$(arg jetson)"
               motor_board="$(arg motor_board)"
-              ssd="$(arg ssd)" />
+              ssd="$(arg ssd)"
+              ultrasounds="$(arg ultrasounds)" />
 </robot>
