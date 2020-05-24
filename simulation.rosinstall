@@ -1,0 +1,6 @@
+- git:
+    local-name: panther
+    uri: git@github.com:rpanther/panther.git
+- git:
+    local-name: panther_simulation
+    uri: git@github.com:rpanther/panther_simulation.git
