@@ -1,47 +1,76 @@
 <?xml version="1.0"?>
 <!--
-The MIT License (MIT)
+Copyright (C) 2020, Raffaello Bonghi <raffaello@rnext.it>
+All rights reserved
 
-Copyright (c) 2020 Raffaello Bonghi
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. Redistributions of source code must retain the above copyright 
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its 
+   contributors may be used to endorse or promote products derived 
+   from this software without specific prior written permission.
+ 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, 
+BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
+FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <launch>
 
-  <arg name="world"        default="panther.world"/>
-  <arg name="namespace"    default=""/>
-
+  <!-- There are default world made on Gazebo:
+       * worlds/empty.world [DEFAULT]
+       * worlds/willowgarage.world
+       * worlds/elevator_ros.world [It's empty]
+       * worlds/mud.world [Arm robots]
+       * worlds/rubble.world
+       * worlds/shapes.world
+       Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable
+       -->
+  <arg name="world_name"        default="worlds/empty.world"/>
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
-  <arg name="paused"       default="false"/>
-  <arg name="use_sim_time" default="true"/>
-  <arg name="gui"          default="true"/>
-  <arg name="headless"     default="false"/>
-  <arg name="debug"        default="false"/>
+  <arg name="paused"              default="false"/>
+  <arg name="use_sim_time"        default="true"/>
+  <arg name="gui"                 default="true"/>
+  <arg name="recording"           default="false"/>
+  <!-- Note that 'headless' is currently non-functional.  See gazebo_ros_pkgs issue #491 (-r arg does not disable
+       rendering, but instead enables recording). The arg definition has been left here to prevent breaking downstream
+       launch files, but it does nothing. -->
+  <arg name="headless"            default="false"/>
+  <arg name="debug"               default="false"/>
+  <arg name="respawn_gazebo"      default="false"/>
+  <arg name="use_clock_frequency" default="false"/>
+  <arg name="pub_clock_frequency" default="100"/>
+  <arg name="enable_ros_network"  default="true" />
+  <!-- Default is not required any namespace to define Panther.
+       For mutiple ROS simulations is suggest to add a namespace
+       -->
+  <arg name="namespace"           default=""/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch" required="true">
-    <arg name="world_name"   value="$(find panther_simulation)/worlds/$(arg world)"/>
-    <arg name="debug"        value="$(arg debug)" />
-    <arg name="gui"          value="$(arg gui)" />
-    <arg name="paused"       value="$(arg paused)"/>
-    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
-    <arg name="headless"     value="$(arg headless)"/>
+    <arg name="world_name"           value="$(arg world_name)"/>
+    <arg name="debug"                value="$(arg debug)" />
+    <arg name="gui"                  value="$(arg gui)" />
+    <arg name="recording"            value="$(arg recording)" />
+    <arg name="paused"               value="$(arg paused)"/>
+    <arg name="use_sim_time"         value="$(arg use_sim_time)"/>
+    <arg name="headless"             value="$(arg headless)"/>
+    <arg name="respawn_gazebo"       value="$(arg respawn_gazebo)"/>
+    <arg name="use_clock_frequency"  value="$(arg use_clock_frequency)"/>
+    <arg name="pub_clock_frequency"  value="$(arg pub_clock_frequency)"/>
+    <arg name="enable_ros_network"   value="$(arg enable_ros_network)"/>
   </include>
 
   <!-- Send the Panther Robot URDF/XACRO to param server -->
@@ -64,3 +93,4 @@ SOFTWARE.
   </include>
 
 </launch>
+

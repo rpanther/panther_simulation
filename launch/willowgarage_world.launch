@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <!--
 Copyright (C) 2020, Raffaello Bonghi <raffaello@rnext.it>
 All rights reserved
@@ -27,26 +27,17 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
-<sdf version="1.4">
-  <!-- We use a custom world for Panther so that the camera angle is launched correctly -->
+<launch>
 
-  <world name="default">
-    <include>
-      <uri>model://ground_plane</uri>
-    </include>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find panther_simulation)/launch/empty_world.launch">
+    <arg name="world_name"    value="worlds/willowgarage.world"/>
+    <arg name="paused"        value="false"/>
+    <arg name="use_sim_time"  value="true"/>
+    <arg name="gui"           value="true"/>
+    <arg name="recording"     value="false"/>
+    <arg name="debug"         value="false"/>
+  </include>
 
-    <!-- Global light source -->
-    <include>
-      <uri>model://sun</uri>
-    </include>
+</launch>
 
-    <!-- Focus camera on tall pendulum -->
-    <!--<gui fullscreen='0'>
-      <camera name='user_camera'>
-        <pose>4.927360 -4.376610 3.740080 0.000000 0.275643 2.356190</pose>
-        <view_controller>orbit</view_controller>
-      </camera>
-    </gui>-->
-
-  </world>
-</sdf>
