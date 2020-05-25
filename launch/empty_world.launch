@@ -57,6 +57,9 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
        For mutiple ROS simulations is suggest to add a namespace
        -->
   <arg name="namespace"           default=""/>
+  <arg name="localization"        default="true"/>
+  <arg name="control"             default="true"/>
+  <arg name="web"                 default="false"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch" required="true">
@@ -87,9 +90,9 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   <!-- Load Panther common nodes -->
   <include file="$(find panther_common)/launch/common.launch">
-    <arg name="localization" value="true"/>
-    <arg name="control" value="true"/>
-    <arg name="web" value="false"/>
+    <arg name="localization" value="$(arg localization)"/>
+    <arg name="control"      value="$(arg control)"/>
+    <arg name="web"          value="$(arg web)"/>
   </include>
 
 </launch>
