@@ -35,7 +35,7 @@ SOFTWARE.
   <arg name="debug"        default="false"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" required="true">
     <arg name="world_name"   value="$(find panther_simulation)/worlds/$(arg world)"/>
     <arg name="debug"        value="$(arg debug)" />
     <arg name="gui"          value="$(arg gui)" />
@@ -58,6 +58,8 @@ SOFTWARE.
 
   <!-- Load Panther common nodes -->
   <include file="$(find panther_common)/launch/common.launch">
+    <arg name="localization" value="true"/>
+    <arg name="control" value="true"/>
     <arg name="web" value="false"/>
   </include>
 
