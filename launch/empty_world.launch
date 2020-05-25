@@ -25,7 +25,7 @@ SOFTWARE.
 <launch>
 
   <arg name="world"        default="panther.world"/>
-  <arg name="namespace"    default="panther"/>
+  <arg name="namespace"    default=""/>
 
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
   <arg name="paused"       default="false"/>
@@ -44,25 +44,21 @@ SOFTWARE.
     <arg name="headless"     value="$(arg headless)"/>
   </include>
 
-  <group ns="$(arg namespace)">
-
-    <!-- Send the Panther Robot URDF/XACRO to param server -->
-    <param name="robot_description"
+  <!-- Send the Panther Robot URDF/XACRO to param server -->
+  <param name="robot_description"
           command="$(find xacro)/xacro '$(find panther_simulation)/urdf/panther.gazebo.xacro'
               name_space:=/$(arg namespace)" />
 
-    <!-- Activate node to propagate the joint state -->
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <!-- Activate node to propagate the joint state -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
-    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-            args="-unpause -urdf -param robot_description -model Panther"/>
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-unpause -urdf -param robot_description -model Panther"/>
 
-    <!-- Load Panther common nodes -->
-    <include file="$(find panther_common)/launch/common.launch">
-      <arg name="web" value="false"/>
-    </include>
-  
-  </group>
+  <!-- Load Panther common nodes -->
+  <include file="$(find panther_common)/launch/common.launch">
+    <arg name="web" value="false"/>
+  </include>
 
 </launch>
