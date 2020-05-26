@@ -25,17 +25,27 @@ SOFTWARE.
 <robot name="sim_panther" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <!--<xacro:arg name="imu_enabled" default="false" />-->
-  <xacro:arg name="name_space" default="/panther" /> 
+  <xacro:arg name="name_space"  default="/panther" /> 
   <!-- Arguments -->
-  <xacro:arg name="zed_model"   default="zed2"/> <!-- Follow zed_repository -->
-  <xacro:arg name="jetson"      default="xavier"/> <!-- options: tx, xavier -->
-  <xacro:arg name="motor_board" default="roboteq"/> <!-- options: unav, roboteq -->
-  <xacro:arg name="ssd"         default="false"/>
+  <xacro:arg name="zed_model"    default="zed2"/> <!-- Follow zed_repository -->
+  <xacro:arg name="jetson"       default="xavier"/> <!-- options: tx, xavier -->
+  <xacro:arg name="motor_board"  default="roboteq"/> <!-- options: unav, roboteq -->
+  <xacro:arg name="ssd"          default="false"/>
   <xacro:arg name="ultrasounds"  default="false"/>
   
-  <xacro:arg name="camera_name"  default="zed"/>
+  <!-- Reference: https://www.stereolabs.com/
+       depth_camera:
+        - left
+        - right
+       resolution:
+        - HD2K
+        - HD1080
+        - HD720
+        - VGA
+       -->
+  <xacro:arg name="camera_name"   default="zed"/>
   <xacro:arg name="depth_camera"  default="left"/>
-  <xacro:arg name="resolution"  default="HD1080"/>
+  <xacro:arg name="resolution"    default="HD720"/>
 
   <xacro:include filename="$(find panther_description)/urdf/robot.urdf.xacro" />
   <xacro:include filename="$(find panther_simulation)/urdf/materials.gazebo.xacro" />

@@ -24,14 +24,20 @@ SOFTWARE.
 -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <!-- depth_camera:
-       - left
-       - right
+  <!-- Reference: https://www.stereolabs.com/
+       depth_camera:
+        - left
+        - right
+       resolution:
+        - HD2K
+        - HD1080
+        - HD720
+        - VGA
        -->
 
   <xacro:macro name="zed_camera_gazebo" params="camera_name camera_model depth_camera resolution">
 
-    <xacro:property name="depth_rate" value="100" />
+    <xacro:property name="depth_rate" value="30" />
 
     <xacro:if value="${resolution == 'HD2K'}">
         <xacro:property name="resolution_width" value="4416" />
@@ -43,12 +49,12 @@ SOFTWARE.
         <xacro:property name="resolution_heigth" value="1080" />
         <xacro:property name="update_rate" value="30" />
     </xacro:if>
-    <xacro:if value="${camera_model == 'HD720'}">
+    <xacro:if value="${resolution == 'HD720'}">
         <xacro:property name="resolution_width" value="2560" />
         <xacro:property name="resolution_heigth" value="720" />
         <xacro:property name="update_rate" value="60" />
     </xacro:if>
-    <xacro:if value="${camera_model == 'VGA'}">
+    <xacro:if value="${resolution == 'VGA'}">
         <xacro:property name="resolution_width" value="1344" />
         <xacro:property name="resolution_heigth" value="376" />
         <xacro:property name="update_rate" value="100" />

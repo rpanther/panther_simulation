@@ -60,6 +60,13 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <arg name="localization"        default="true"/>
   <arg name="control"             default="true"/>
   <arg name="web"                 default="false"/>
+  
+  <!-- ZED Camer Reference: https://www.stereolabs.com/ -->
+  <arg name="camera_name"                 default="zed"/>
+  <!-- depth_camera: {left, right} -->
+  <arg name="depth_camera"                 default="left"/>
+  <!-- resolution: {HD2K, HD1080, HD720, VGA} -->
+  <arg name="resolution"                 default="HD720"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -79,7 +86,10 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Send the Panther Robot URDF/XACRO to param server -->
   <param name="robot_description"
           command="$(find xacro)/xacro '$(find panther_simulation)/urdf/panther.gazebo.xacro'
-              name_space:=/$(arg namespace)" />
+              name_space:=/$(arg namespace)
+              camera_name:=$(arg camera_name)
+              depth_camera:=$(arg depth_camera)
+              resolution:=$(arg resolution)" />
 
   <!-- Activate node to propagate the joint state -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
