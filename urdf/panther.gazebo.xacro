@@ -76,5 +76,5 @@ SOFTWARE.
   <!-- LIDAR emulation -->
   <xacro:lidar_gazebo />
   <!-- IMU emulation -->
-  <xacro:imu_gazebo name="razor" />
+  <xacro:imu_gazebo name="razor" frame="base_imu_link" />
 </robot>

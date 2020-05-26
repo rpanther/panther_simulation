@@ -24,7 +24,7 @@ SOFTWARE.
 -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:macro name="imu_gazebo" params="name">
+  <xacro:macro name="imu_gazebo" params="name frame">
 
     <!-- lidar -->
     <gazebo reference="base_imu_link">
@@ -36,12 +36,12 @@ SOFTWARE.
             <topic>/${name}/imu/data</topic>
             <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
                 <topicName>/${name}/imu/data</topicName>
-                <bodyName>base_imu_link</bodyName>
+                <bodyName>${frame}</bodyName>
                 <updateRateHZ>100.0</updateRateHZ>
                 <gaussianNoise>0.0025</gaussianNoise>
                 <xyzOffset>0 0 0</xyzOffset>
                 <rpyOffset>0 0 0</rpyOffset>
-                <frameName>base_imu_link</frameName>
+                <frameName>${frame}</frameName>
             </plugin>
             <pose>0 0 0 0 0 0</pose>
         </sensor>
