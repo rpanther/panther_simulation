@@ -24,7 +24,6 @@ SOFTWARE.
 -->
 <robot name="sim_panther" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <!--<xacro:arg name="imu_enabled" default="false" />-->
   <xacro:arg name="name_space"  default="/panther" /> 
   <!-- Arguments -->
   <xacro:arg name="zed_model"    default="zed2"/> <!-- Follow zed_repository -->
@@ -52,6 +51,7 @@ SOFTWARE.
   <!-- sensors -->
   <xacro:include filename="$(find panther_simulation)/urdf/zed.gazebo.xacro" />
   <xacro:include filename="$(find panther_simulation)/urdf/lidar.gazebo.xacro" />
+  <xacro:include filename="$(find panther_simulation)/urdf/imu.gazebo.xacro" />
 
   <!-- Gazebo plugin for ROS Control -->
   <gazebo>
@@ -75,4 +75,6 @@ SOFTWARE.
                             depth_camera="$(arg depth_camera)" resolution="$(arg resolution)" />
   <!-- LIDAR emulation -->
   <xacro:lidar_gazebo />
+  <!-- IMU emulation -->
+  <xacro:imu_gazebo name="razor" />
 </robot>
