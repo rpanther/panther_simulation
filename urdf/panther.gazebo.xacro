@@ -32,6 +32,10 @@ SOFTWARE.
   <xacro:arg name="motor_board" default="roboteq"/> <!-- options: unav, roboteq -->
   <xacro:arg name="ssd"         default="false"/>
   <xacro:arg name="ultrasounds"  default="false"/>
+  
+  <xacro:arg name="camera_name"  default="zed"/>
+  <xacro:arg name="depth_camera"  default="left"/>
+  <xacro:arg name="resolution"  default="HD1080"/>
 
   <xacro:include filename="$(find panther_description)/urdf/robot.urdf.xacro" />
   <xacro:include filename="$(find panther_simulation)/urdf/materials.gazebo.xacro" />
@@ -49,10 +53,6 @@ SOFTWARE.
 
   <!-- Color materials for Gazebo -->
   <xacro:materials_gazebo />
-  <!-- ZED emulation -->
-  <xacro:zed_camera_gazebo prefix="zed" />
-  <!-- LIDAR emulation -->
-  <xacro:lidar_gazebo />
   <!-- Panther robot -->
   <xacro:panther
               zed_model="$(arg zed_model)"
@@ -60,4 +60,9 @@ SOFTWARE.
               motor_board="$(arg motor_board)"
               ssd="$(arg ssd)"
               ultrasounds="$(arg ultrasounds)" />
+  <!-- ZED emulation -->
+  <xacro:zed_camera_gazebo camera_name="$(arg camera_name)" camera_model="$(arg zed_model)"
+                            depth_camera="$(arg depth_camera)" resolution="$(arg resolution)" />
+  <!-- LIDAR emulation -->
+  <xacro:lidar_gazebo />
 </robot>
