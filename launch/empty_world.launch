@@ -53,20 +53,9 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <arg name="use_clock_frequency" default="false"/>
   <arg name="pub_clock_frequency" default="100"/>
   <arg name="enable_ros_network"  default="true" />
-  <!-- Default is not required any namespace to define Panther.
-       For mutiple ROS simulations is suggest to add a namespace
-       -->
-  <arg name="namespace"           default=""/>
+  <!-- Panther Configuration -->
   <arg name="localization"        default="true"/>
   <arg name="control"             default="true"/>
-  <arg name="web"                 default="false"/>
-  
-  <!-- ZED Camer Reference: https://www.stereolabs.com/ -->
-  <arg name="camera_name"                 default="zed"/>
-  <!-- depth_camera: {left, right} -->
-  <arg name="depth_camera"                 default="left"/>
-  <!-- resolution: {HD2K, HD1080, HD720, VGA} -->
-  <arg name="resolution"                 default="HD720"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -82,27 +71,11 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <arg name="pub_clock_frequency"  value="$(arg pub_clock_frequency)"/>
     <arg name="enable_ros_network"   value="$(arg enable_ros_network)"/>
   </include>
-
-  <!-- Send the Panther Robot URDF/XACRO to param server -->
-  <param name="robot_description"
-          command="$(find xacro)/xacro '$(find panther_simulation)/urdf/panther.gazebo.xacro'
-              name_space:=/$(arg namespace)
-              camera_name:=$(arg camera_name)
-              depth_camera:=$(arg depth_camera)
-              resolution:=$(arg resolution)" />
-
-  <!-- Activate node to propagate the joint state -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-
-  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-        args="-unpause -urdf -param robot_description -model Panther"/>
-
-  <!-- Load Panther common nodes -->
-  <include file="$(find panther_common)/launch/common.launch">
-    <arg name="localization" value="$(arg localization)"/>
-    <arg name="control"      value="$(arg control)"/>
-    <arg name="web"          value="$(arg web)"/>
+  
+  <!-- Panther spwan -->
+  <include file="$(find panther_simulation)/launch/spawn_robot.launch">
+    <arg name="localization"        value="$(arg localization)"/>
+    <arg name="control"             value="$(arg control)"/>
   </include>
 
 </launch>
