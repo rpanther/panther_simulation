@@ -102,7 +102,7 @@ SOFTWARE.
       <sensor type="multicamera" name="${camera_name}_stereo_camera">
         <update_rate>${update_rate}</update_rate>
         <camera name="left">
-          <horizontal_fov>${58.0*M_PI/180.0}</horizontal_fov>
+          <horizontal_fov>${fov}</horizontal_fov>
           <image>
             <width>${resolution_width}</width>
             <height>${resolution_heigth}</height>
@@ -119,7 +119,7 @@ SOFTWARE.
           </noise>
         </camera>
         <camera name="right">
-          <horizontal_fov>${58.0*M_PI/180.0}</horizontal_fov>
+          <horizontal_fov>${fov}</horizontal_fov>
           <image>
             <width>${resolution_width}</width>
             <height>${resolution_heigth}</height>
@@ -139,16 +139,17 @@ SOFTWARE.
           <cameraName>${camera_name}</cameraName>
           <alwaysOn>true</alwaysOn>
           <updateRate>${update_rate}</updateRate>
-          <imageTopicName>image_raw_color</imageTopicName>
+          <imageTopicName>image_rect_color</imageTopicName>
           <cameraInfoTopicName>camera_info</cameraInfoTopicName>
           <frameName>${camera_model}_left_camera_optical_frame</frameName>
-          <rightFrameName>${camera_model}_right_camera_optical_frame</rightFrameName>
-          <hackBaseline>0.07</hackBaseline>
+          <!--<rightFrameName>${camera_model}_right_camera_optical_frame</rightFrameName>-->
+          <baseline>${baseline}</baseline>
           <distortionK1>0.0</distortionK1>
           <distortionK2>0.0</distortionK2>
           <distortionK3>0.0</distortionK3>
           <distortionT1>0.0</distortionT1>
           <distortionT2>0.0</distortionT2>
+          <hackBaseline>0.07</hackBaseline>
         </plugin>
       </sensor>
     </gazebo>
@@ -173,10 +174,10 @@ SOFTWARE.
           <cameraName>${camera_name}</cameraName>
           <alwaysOn>true</alwaysOn>
           <updateRate>${depth_rate}</updateRate>
-          <imageTopicName>${depth_camera}/image_rect_color</imageTopicName>
+          <imageTopicName>rgb/image_rect_color</imageTopicName>
           <depthImageTopicName>depth/depth_registered</depthImageTopicName>
           <pointCloudTopicName>depth/points</pointCloudTopicName>
-          <cameraInfoTopicName>${depth_camera}/camera_info</cameraInfoTopicName>
+          <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
           <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
           <frameName>camera_depth_frame_gazebo</frameName>
           <baseline>${baseline}</baseline>
