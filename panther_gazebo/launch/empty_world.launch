@@ -73,7 +73,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   </include>
   
   <!-- Panther spwan -->
-  <include file="$(find panther_simulation)/launch/spawn_robot.launch">
+  <include file="$(find panther_gazebo)/launch/spawn_robot.launch">
     <arg name="localization"        value="$(arg localization)"/>
     <arg name="control"             value="$(arg control)"/>
   </include>

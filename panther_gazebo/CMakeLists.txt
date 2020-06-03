@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(panther_simulation)
+project(panther_gazebo)
 
 find_package(catkin REQUIRED COMPONENTS 
     panther_description
