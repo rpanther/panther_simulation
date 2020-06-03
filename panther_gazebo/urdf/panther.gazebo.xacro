@@ -47,11 +47,11 @@ SOFTWARE.
   <xacro:arg name="resolution"    default="HD720"/>
 
   <xacro:include filename="$(find panther_description)/urdf/robot.urdf.xacro" />
-  <xacro:include filename="$(find panther_simulation)/urdf/materials.gazebo.xacro" />
+  <xacro:include filename="$(find panther_gazebo)/urdf/materials.gazebo.xacro" />
   <!-- sensors -->
-  <xacro:include filename="$(find panther_simulation)/urdf/zed.gazebo.xacro" />
-  <xacro:include filename="$(find panther_simulation)/urdf/lidar.gazebo.xacro" />
-  <xacro:include filename="$(find panther_simulation)/urdf/imu.gazebo.xacro" />
+  <xacro:include filename="$(find panther_gazebo)/urdf/zed.gazebo.xacro" />
+  <xacro:include filename="$(find panther_gazebo)/urdf/lidar.gazebo.xacro" />
+  <xacro:include filename="$(find panther_gazebo)/urdf/imu.gazebo.xacro" />
 
   <!-- Gazebo plugin for ROS Control -->
   <gazebo>

@@ -30,8 +30,8 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <launch>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
-  <include file="$(find panther_simulation)/launch/empty_world.launch">
-    <arg name="world_name"    value="$(find panther_simulation)/worlds/kitchen.world"/>
+  <include file="$(find panther_gazebo)/launch/empty_world.launch">
+    <arg name="world_name"    value="$(find panther_gazebo)/worlds/kitchen.world"/>
     <arg name="paused"        value="false"/>
     <arg name="use_sim_time"  value="true"/>
     <arg name="gui"           value="true"/>
