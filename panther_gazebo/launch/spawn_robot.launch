@@ -34,10 +34,11 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
        -->
   <arg name="namespace"                    default=""/>
   <arg name="localization"                 default="true"/>
+  <arg name="mapping"                      default="true"/>
   <arg name="control"                      default="true"/>
   <arg name="web"                          default="false"/>
   <!-- Output: {screen, log} -->
-  <arg name="output"                       default="screen" />
+  <arg name="output"                       default="log" />
   
   <!-- ZED Camer Reference: https://www.stereolabs.com/ -->
   <arg name="camera_name"                  default="zed"/>
@@ -54,6 +55,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               depth_camera:=$(arg depth_camera)
               resolution:=$(arg resolution)" />
 
+  <rosparam command="load" file="$(find panther_gazebo)/config/ros_control.yaml" />
   <!-- Activate node to propagate the joint state -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
@@ -64,6 +66,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Load Panther common nodes -->
   <include file="$(find panther_common)/launch/common.launch">
     <arg name="localization" value="$(arg localization)"/>
+    <arg name="mapping"      value="$(arg mapping)"/>
     <arg name="control"      value="$(arg control)"/>
     <arg name="web"          value="$(arg web)"/>
   </include>
