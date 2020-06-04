@@ -2,11 +2,10 @@
 # https://github.com/rpanther/panther_simulation/issues/5
 gazebo_ros_control:
   pid_gains:
-      lef_joint:
+      left_joint:
           p: 1000.0
           i: 0.01
           d: 10.0
-
       right_joint:
           p: 1000.0
           i: 0.01
