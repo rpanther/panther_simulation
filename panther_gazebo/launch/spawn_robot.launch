@@ -36,7 +36,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <arg name="localization"                 default="true"/>
   <arg name="mapping"                      default="true"/>
   <arg name="control"                      default="true"/>
-  <arg name="web"                          default="false"/>
+  <arg name="web"                          default="true"/>
   <!-- Output: {screen, log} -->
   <arg name="output"                       default="log" />
   
