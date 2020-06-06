@@ -80,6 +80,10 @@ SOFTWARE.
         <xacro:property name="fov" value="2.0" />
         <xacro:property name="clip_near" value="0.3" />
         <xacro:property name="clip_far" value="25" />
+        <!-- Gazebo color -->
+        <gazebo reference="${camera_model}_camera_center">
+          <material>Gazebo/Grey</material>
+        </gazebo>
     </xacro:if>
     <xacro:if value="${camera_model == 'zedm'}">
         <xacro:property name="baseline" value="0.06" />
@@ -88,6 +92,10 @@ SOFTWARE.
         <xacro:property name="clip_far" value="15" />
         <!-- Add IMU for ZED -->
         <xacro:imu_gazebo name="${camera_name}" frame="${camera_name}_imu_frame_gazebo" />
+        <!-- Gazebo color -->
+        <gazebo reference="${camera_model}_camera_center">
+          <material>Gazebo/DarkGrey</material>
+        </gazebo>
     </xacro:if>
     <xacro:if value="${camera_model == 'zed2'}">
         <xacro:property name="baseline" value="0.12" />
@@ -96,6 +104,10 @@ SOFTWARE.
         <xacro:property name="clip_far" value="20" />
         <!-- Add IMU for ZED -->
         <xacro:imu_gazebo name="${camera_name}" frame="${camera_name}_imu_frame_gazebo" />
+        <!-- Gazebo color -->
+        <gazebo reference="${camera_model}_camera_center">
+          <material>Gazebo/Black</material>
+        </gazebo>
     </xacro:if>
 
     <gazebo reference="${camera_model}_camera_center">

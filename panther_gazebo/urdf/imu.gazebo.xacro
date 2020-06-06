@@ -26,7 +26,11 @@ SOFTWARE.
 
   <xacro:macro name="imu_gazebo" params="name frame">
 
-    <!-- lidar -->
+    <gazebo reference="imu_board_link">
+      <material>Gazebo/Red</material>
+    </gazebo>
+
+    <!-- IMU -->
     <gazebo reference="base_imu_link">
         <gravity>true</gravity>
         <sensor name="${name}_imu_sensor" type="imu">
